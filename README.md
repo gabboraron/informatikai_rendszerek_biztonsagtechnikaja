@@ -1,4 +1,4 @@
-# informatikai rendszerek biztonságtechnikája
+# Informatikai rendszerek biztonságtechnikája
 
 **Ajánlott irodalom:**
 - [Buttyán Levente, Györfi László, Győri Sándor, Vajda István: Kódolástechnika, 2006 - crysys web változat – 6.](https://docplayer.hu/2525122-Kodolastechnika-2006-crysys-web-valtozat-6-kodolastechnika-buttyan-levente-gyorfi-laszlo-gyori-sandor-vajda-istvan-2006-december-18.html)
@@ -13,13 +13,15 @@
 - május 06 ZH
 - szóbeli ZH
 
+## EA1
+- Tempest támadás
+- passzív támadás: lehallgatás
+- aktív támadás: a támadó beavatkozik a kommunikációba
+- IP spoofing: az ip cím meghamisítása
+- smurf: broadcast üzenetet küldünk az áldozatt felé
+- switchek támadása: a switch táblájába betesszük a saját címünk is így megkapunk minden üzenetet mi is.
+- social engineering: a támadás az emberi megtévesztésen alapul
+- reverse engeneering: amikor elhitetik az áldozattal, hogy ő a kezdeményező, pl *a bejelentett hiba miatt telefonálok*
+- xss: a weboldalba beépített mezőkbe írunk `js` kódot vagy szerver oldali kódot és azt futtatjuk
 
-Tempest támadás
-passzív támadás: lehallgatás
-aktív támadás: a támadó beavatkozik a kommunikációba
-IP spoofing: az ip cím meghamisítása
-smurf: broadcast üzenetet küldünk az áldozatt felé
-switchek támadása: a switch táblájába betesszük a saját címünk is így megkapunk minden üzenetet mi is.
-social engineering: a támadás az emberi megtévesztésen alapul
-reverse engeneering: amikor elhitetik az áldozattal, hogy ő a kezdeményező, pl *a bejelentett hiba miatt telefonálok*
-xss: a weboldalba beépített mezőkbe írunk `js` kódot vagy szerver oldali kódot és azt futtatjuk
+## EA2
