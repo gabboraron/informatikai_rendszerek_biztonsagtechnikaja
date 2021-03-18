@@ -25,3 +25,12 @@
 - xss: a weboldalba beépített mezőkbe írunk `js` kódot vagy szerver oldali kódot és azt futtatjuk
 
 ## EA2
+
+## EA6
+- rendszerinformáció console megnyitás: `rsm32`
+- eszközkezelő: a csatlakoztatottt eszközök kezelését és a hozzá tartozó infrmációkat tekinthetjük meg.
+
+gpg titkosítás: https://www.gpg4win.org/
+- rsa 2048 (3242 bit-es is jó)
+- 
+
