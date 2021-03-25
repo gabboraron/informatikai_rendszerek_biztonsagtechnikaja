@@ -32,5 +32,25 @@
 
 gpg titkosítás: https://www.gpg4win.org/
 - rsa 2048 (3242 bit-es is jó)
-- 
+
+## EA7
+*információbiztonság managemenet elvárásai:*
+- rendelkezésre álllás
+- bizalmasság
+- sétretlenség
+- hitelesség
+
+**Gyakori hibák:**
+- nincsennek általában jól kiosztva a jogosultságok.
+
+
+**jelszó nehézség ellenörző oldalak:**
+- https://password.kaspersky.com/
+- http://www.passwordmeter.com/
+- https://howsecureismypassword.net/
+- https://www.elcomsoft.com/tools_for_home_use.html
+
+
+### Server beállítások: 
+új jelszó kell: Almafa123
 
