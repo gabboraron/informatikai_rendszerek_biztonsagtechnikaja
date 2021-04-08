@@ -54,3 +54,52 @@ gpg titkosítás: https://www.gpg4win.org/
 ### Server beállítások: 
 új jelszó kell: Almafa123
 
+## rendszertervezés
+- ne legyen super user
+- használjunk jól beállított tűzfalakat
+- titkosított módon kezeljük a ebállításokat/használt titkosítási metóduokat.
+
+**Támadásokról:**
+- motiváció:
+  - információszerzés
+  - károkozás/rendszerek bénítása
+  - szolgáltatásokhoz hozzáférés
+- passzív támadás: lehallgatunk
+- aktív támadás: akár megszemélyesítjük, kiadjuk magunkat a rendszer egyik résztvevőjének, stb
+- csomag alapú támadás (IP spoofing): IP címet hamisítunk, és így lépünk be.
+  - RST üzeneteket küldözgethetünk, ellehetetlenítjük a belső kommunikációt
+  - ICMP támadás: echo requestet kérünk minden résztvevőtől, és így mindneki válaszolgat, és másnak már nincs hely, megoldás: routerben icmp echo requestet szűrünk
+- DNS támadás: TTL időt kihasználva létrehozunk egy áll oldalt ami hasonlít a lekértre, ahol a felhasználó bedja az adatiati, mi lementjük, és továbbküldjük a hivatalos oldalra.
+- tiltsunk minden portot mai nincs használatban
+- naplózást ne a naplózott gépen tároljuk
+- inkább szüntessük meg a bizotnsági hibát és tegyünk be egy újat, mintsem hagyjuk a régit
+- címtár: hálózati objektumokat, kötetek, nyomtatók, stb adatainak tárolása
+
+### IBM Tivoli Directory Server
+- adatmentés
+- csv -> xml konvertálást tudunk létrehzni,
+- https://github.com/sivabalanb/Data-Analysis-with-Pandas-and-Python/blob/master/employees.csv
+- az a lényege, hogy a cég fejlődésével egyszerre meglévő, működő rendszerekből szedi ki az információkat, és így nem kell a meglévő rendszereknek leállnia, rendszerfrissítés közben.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
