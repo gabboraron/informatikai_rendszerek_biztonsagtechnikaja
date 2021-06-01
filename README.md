@@ -14,7 +14,9 @@
 - május 06 ZH
 - szóbeli vizsga
 
-## EA1
+--------------
+
+## EA1 - alapok
 - Tempest támadás
 - **passzív támadás:** *lehallgatás* (evesdropping, wire-tapping), az érzékeny információ megszerzésére irányul, a támadó nem módosítja az átviteli csatorna tartalmát
 - **aktív támadás:** a támadó beavatkozik a kommunikációba - A támadó maga is forgalmaz a csatornán.•üzenetmódosítás•megszemélyesítés,•visszajátszás•szolgáltatás megtagadás *(DoS ~ denialof  service)* típusú támadások
@@ -149,12 +151,90 @@
 > - **Hitelesítés:** az üzenet küldőjének megbízható azonosítása. Detektálható, ha egy támadó más nevében próbál üzenetet küldeni.
 > - **Letagadhatatlanság:** elérhető, hogy egy üzenet küldője később ne tudja letagadni, hogy ő küldte az üzenetet
 
+## EA2-EA6 - Kriptológia
+**Céljaink lehetnek:**
+–Titkosítás
+–Integritásvédelem (tartalom változatlansága)
+–Hitelesítés *(feladó személye)*
+–Letagadhatatlanság
+
+![plain text to chipher text](https://notes.shichao.io/cnspp/figure_2.1.png)
+
+### Szimetrikus kulcsú rejtjelezés
+- a védettsége legfeljebb akkora mint a kulcs védettsége, rossz esetben elmaradhat tőle, ekkor a kulcs ismerete nélkül is lehet mondnai az információról valamit
+- a kulcsot titokban kell kicserélni
+> #### Kerckhoff-elv
+> Titokban csak egy minél kisebb információt (kulcsot) kelljen tartani, NE az egész algoritmust 
+
+> ### Támadó pzíciók 
+> #### ismert rejtett szöveg alapú támadó
+> csak a rejtett szöveget ismeri, de nem tudja milyen nyilt szöveghez tartozik
+> #### ismert rejtett szöveg alapú támadó
+> ismeri melyik rejtett szöveghez melyik nyilt szöveg tartozik
+> #### választott nyílt szöveg támadás
+> olyan nyilt szövegek amelyek többet árulnak el a szövegnél magánál és a rejtett szöveg továbbra is ismert
+
+> #### oldalcsatornás támadás
+> Az algoritmus fizikai jellemzői amik kinyerhetőek, *pl: egy processzor áramfelvétele függ attól, hogy mit csinál, és ha elég érzékeny műszerrel mérjük, akkor visszakövetkeztethető, hogy mit csinál a processzor, akár egyes bitek is kolvashatóak.* 
+
+> #### feltételes biztonság
+> Brute force támadás, ami alapvetően a legtöbb algoritmusra igaz. Ha nagy kulcsteret *(kulcstér = lehetséges kulcsok száma)* alkalmazunk akkor ez ellen részben védekezhetünk. **A nagy kuclstér viszont csak szükséges de nem elégséges feltétel!** 
+
+> #### létezik feltétel nélküli biztonság
+> azaz olyan titkosítás ami brute forceal sem feltörhető soha
+> ```
+> üzenet: x: 01101110100
+> kulcs ~ random számsor: k: 00110111001
+> 
+> titkosítás ~ x XOR k = T: 01011001101
+> dekódolás ~ T XOR k: 01101110100
+> ```
+> A `XOR` a `mod 2` összeadásnak megfeleltethető.
+
+#### Történelmi példák
+##### Caesar-kód - shift-kód
+- Valahányal későbbi betűt vesszük ki az ábécéből az eredeti betű helyett
+- ROT13 - k=13-al titkosított shift-kód
+
+*kulcstér mérete = használt ábécé faktor => gyakorlatban az effektív használható bitek hosszát adjuk meg, azaz `log2 ábécé!`*
+
+**homofóniás helyettesítés**, mikor nagy gyakoriságú betűket több betűnek feletetünk meg, pl a = a, és alpha, ésekkor az olvasó is ezeket helyettesíti vissza, így betűgyakoriság alapján történő kriptoanalízis nem lehetséges.
+
+##### Vienére-féle módszer
+használjuk az alábbi táblázatot úgy, hogy a bemeneti szöveg `x: TAMADJESZAKROL`, a kulcs egy tetszőleges szó, pl `kutya`, ekkor ezt kapjuk:
+```
+KUTYAKUTYAKUTY
+TAMADJESZAKROL
+```
+Ekkor a nyílt szöveg minden egyes karakterét azzal a monoalfabetikus helyettesítővel kódoljuk amit a fölötte levő szöveg kijelöl az alábbi táblázatban.
+```
+  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+A A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+B B C D E F G H I J K L M N O P Q R S T U V W X Y Z A
+C C D E F G H I J K L M N O P Q R S T U V W X Y Z A B
+D D E F G H I J K L M N O P Q R S T U V W X Y Z A B C
+E E F G H I J K L M N O P Q R S T U V W X Y Z A B C D
+F F G H I J K L M N O P Q R S T U V W X Y Z A B C D E
+G G H I J K L M N O P Q R S T U V W X Y Z A B C D E F
+H H I J K L M N O P Q R S T U V W X Y Z A B C D E F G
+I I J K L M N O P Q R S T U V W X Y Z A B C D E F G H
+J J K L M N O P Q R S T U V W X Y Z A B C D E F G H I
+K K L M N O P Q R S T U V W X Y Z A B C D E F G H I J
+L L M N O P Q R S T U V W X Y Z A B C D E F G H I J K
+M M N O P Q R S T U V W X Y Z A B C D E F G H I J K L
+N N O P Q R S T U V W X Y Z A B C D E F G H I J K L M
+```
+így kapjuk:`DUGYD....`
+
+**A módszer algoritmikus gyengesége** a kulcsfelhasználás ciklikussága, azaz ismétlődik a kódoló karakter, pl `k` val van kódolva`T`, `J`, `K` is. 
+
+**Kasiski-törés:** az ismétlődő részek veéltlenül ugyanazon kulcs alá esnek akkor véletlenül épp a kulcs is lehet megegyező. *(ilyenek pl a névelők)* Ha tudjuk hanyadik pontonként ismétlődik akkor megtudjuk a kulcshosszt, mivel a hossz méretének osztója a kulcs mérete.
 
 
+### Nyilvános kulcsú rejtjelezés (pulic key)
+> a felek kulccsere nélkül is tudnak titokban kommunikálni
+A nyilvános kulcsú titkosítás az amikor a nyilvános kulcsból nem könnyen lehet kiszámolni a titkos kulcsot
 
-
-
-## EA2
 
 ## EA6
 - rendszerinformáció console megnyitás: `rsm32`
