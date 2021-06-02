@@ -264,8 +264,13 @@ SP titkosítás, azaz kis méretű bit helyettesítés és nagy méretű bit per
 - blokk mérete 64 bit, azaz 64 bitet tud elkódolni, 56 bites kulcshosszúságú, 16 "réteg" van benne, 
 ![DES szerkezete](https://wiki.x10sec.org/crypto/blockcipher/figure/des.gif)
 Itt a DES szabvány szerint választjuk ki minden egyes rétegnél, hogy hány kulcsot váalsztunk ki a bemenetből. Ez a **kulcsütemező**nk. Az SP struktúra használatakor a biztonság mértéke leginkább az S dobozokon múlik, kevésbé P-től, és a rétegek számától!
+- **hiányossága:** S doboz linearitása *(a kimenő bitek előállíthatóak a bemenő bitek valamilyen lináris kombinációjaként)* tönkreteszi az egészet. Ekkor ha az S dobozokat lineárisan közelítjük akkor felépíthető az S doboz maga is. Ez a *lináris kriptoanlaízis*. Másik módszer a *diferenciális kriptoanalízis*, amikor rögzitem a bemenő diferenciákat, és figyelem a kijövőket, és mindig összehasonlÍtom. Akkor védett ez ellen az eljárás, ha egyenletlen, a DES nem ilyen.
+- DESen a többszörös rejtjelezés nem zárt tehát van értelme. 
 
-
+#### Main in the middle attack - találkozás középen
+- Sorsoltatok egy kulcsot, és elkódolom a nyílt szöveget az első lépés szerint és tovább megyek és így tovább...
+- kulcs jelöltekkel a rejtett szövegeket dekódolom, ha első pár siekres akkor továbbmegyek, és így tovább...
+- **jobb megoldás:** egyik irányból kódoljuk a plain textet másik irányból pdidg a kódolt szöveget dekódoljuka sosroslt kulcsal, ha stimmel középen tlaálkozunk.
 
 ### Nyilvános kulcsú rejtjelezés (pulic key)
 > a felek kulccsere nélkül is tudnak titokban kommunikálni
