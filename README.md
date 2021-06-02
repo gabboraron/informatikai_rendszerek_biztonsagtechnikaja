@@ -273,9 +273,27 @@ Itt a DES szabvány szerint választjuk ki minden egyes rétegnél, hogy hány k
 - **jobb megoldás:** egyik irányból kódoljuk a plain textet másik irányból pdidg a kódolt szöveget dekódoljuka sosroslt kulcsal, ha stimmel középen tlaálkozunk.
 
 ### Nyilvános kulcsú rejtjelezés (pulic key)
-> a felek kulccsere nélkül is tudnak titokban kommunikálni
-A nyilvános kulcsú titkosítás az amikor a nyilvános kulcsból nem könnyen lehet kiszámolni a titkos kulcsot
+> a felek kulccsere nélkül is tudnak titokban kommunikálni, tehát semilyen titkos csatorna nem áll rendelkezésre.
+> 
+> A nyilvános kulcsú titkosítás az amikor a nyilvános kulcsból nem könnyen lehet kiszámolni a titkos kulcsot.
+> 
+> mindkét félnek van egy saját kódoláshoz és dekódoláshoz szükséges kulcsa. A kódoláshoz szükséges kulcs az publikus. Ha akarok üzenetet küldeni akkor a címzett kódoláshoz szükséges kulcsával kódolom. 
+> 
+> ![RSA](https://www.researchgate.net/profile/Hueseyin-Bodur/publication/298298027/figure/fig2/AS:339820552441867@1458030941634/RSA-algorithm-structure.png)
+> 
+> kvantuum sázmítógéppel [Shore algoritmusáva törhető](https://jonathan-hui.medium.com/qc-cracking-rsa-with-shors-algorithm-bc22cb7b7767)
+> 
+> **ECB** rejtjelezésnél a rejtett blokk ugyanaz ha ugyanaz a kulcs.
+> 
+> **CBC** üzemmódban feldaraboljuk a stringet, úgy kódoljuk el. Ez jó kimenetet fog adni. Viszont nem párhuzamosítható a kódolás folyamata, a dekódolás viszont párhuzmaosítható.
 
+### Üzenet hitelesítés
+> a feladó és a tratalom igazolásának módszere
+> 
+> Alapvetően ezt adja meg a crc kódoást adó checksum, de az csak azt adja meg, hogy a kapott üzenetet helyes kaptuk meg, de az aktív támadás ellen nem véd!
+
+### digitálsi aláírás
+> függ az üzenettől ezért az aláírás ellenörző meg tudja mondnai, hogy egy másik üzenetet ha aláírtunk akkor az alatt más kéne legyen az aláírásunk is! 
 
 ## EA6
 - rendszerinformáció console megnyitás: `rsm32`
