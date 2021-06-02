@@ -3,7 +3,7 @@
 **Ajánlott irodalom:**
 - [Buttyán Levente, Györfi László, Győri Sándor, Vajda István: Kódolástechnika, 2006 - crysys web változat – 6.](https://docplayer.hu/2525122-Kodolastechnika-2006-crysys-web-valtozat-6-kodolastechnika-buttyan-levente-gyorfi-laszlo-gyori-sandor-vajda-istvan-2006-december-18.html)
 - [Buttyán Levente, Vajda István : Kriptográfia és alkalmazásai TYPOTEX ISBN 963-9548-13-8 *fizetős!*](https://www.interkonyv.hu/konyvek/buttyan-levente-vajda-istvan-kriptografia-es-alkalmazasai/)
-- Virasztó Tamás : Titkosítás és adatelrejtés. Netacademia Oktatóközpont. ISBN 963-214253-5
+- [Virasztó Tamás: Titkosítás és adatelrejtés. Netacademia Oktatóközpont. ISBN 963-214253-5](https://docplayer.hu/336415-Viraszto-tamas-titkositas-es-adatrejtes-biztonsagos-kommunikacio-es-algoritmikus-adatvedelem.html)
 - Nagy Sándor: Elektronikus leveleink védelme, Computerbooks, 2005.
 - https://www.rejtjelezo.hu/
 
@@ -192,6 +192,7 @@
 > A `XOR` a `mod 2` összeadásnak megfeleltethető.
 
 #### Történelmi példák
+Helyettesítő (szubsztitúciós) rejtjelezők:
 ##### Caesar-kód - shift-kód
 - Valahányal későbbi betűt vesszük ki az ábécéből az eredeti betű helyett
 - ROT13 - k=13-al titkosított shift-kód
@@ -199,6 +200,8 @@
 *kulcstér mérete = használt ábécé faktor => gyakorlatban az effektív használható bitek hosszát adjuk meg, azaz `log2 ábécé!`*
 
 **homofóniás helyettesítés**, mikor nagy gyakoriságú betűket több betűnek feletetünk meg, pl a = a, és alpha, ésekkor az olvasó is ezeket helyettesíti vissza, így betűgyakoriság alapján történő kriptoanalízis nem lehetséges.
+
+Ez **algebrailag zárt** rejtjelező, azaz, ha eltolunk 3-mal és aztán a kapott szöveget eltoljuk 5-tel és újrarejtjelezzük az ugyanaz mintha 8-al tolnánk el és azzal rejtjeleznénk. Ilyen a shift is.
 
 ##### Vienére-féle módszer
 használjuk az alábbi táblázatot úgy, hogy a bemeneti szöveg `x: TAMADJESZAKROL`, a kulcs egy tetszőleges szó, pl `kutya`, ekkor ezt kapjuk:
@@ -229,6 +232,39 @@ N N O P Q R S T U V W X Y Z A B C D E F G H I J K L M
 **A módszer algoritmikus gyengesége** a kulcsfelhasználás ciklikussága, azaz ismétlődik a kódoló karakter, pl `k` val van kódolva`T`, `J`, `K` is. 
 
 **Kasiski-törés:** az ismétlődő részek veéltlenül ugyanazon kulcs alá esnek akkor véletlenül épp a kulcs is lehet megegyező. *(ilyenek pl a névelők)* Ha tudjuk hanyadik pontonként ismétlődik akkor megtudjuk a kulcshosszt, mivel a hossz méretének osztója a kulcs mérete.
+
+##### affin rejtjelező
+- kódolás `y = (ax+b) mod 26`
+- dekódolás <img src="https://render.githubusercontent.com/render/math?math=x = (a^{-1} (y-b)) mod 26">
+- feltétele, hogy `a`nak lézik inverze `mod` aritmetikával, fenti példával ulcstér mérete `12*26`.
+
+##### Hill-rejtjelező (1910-2015)
+> Mátrixokat használunk az előzőek mentén. Választunk egy `n x n` mátrixot kulcsnak. Ekkor a titkosítandó szöveget `1 x n` méretű oszlopmátrixokká alakítjuk majd sorra beszoorzzuk mátrixszorzással a kulcsunkkal. Ekkor ha valaki törni akar, akkor betű `n`eseket kell felismerjen. Ekkor viszont a dekódoláshoz ismerni kell a mátrix inverzének számát. 
+
+#### Transzpozíciós rejtjelezők
+> A karakter nem változik, csak a sorrendje. Azaz cserélünk valamilyen eljárás szerint.
+##### oszlop transzpozíció
+Kódoljuk a `we are discovered flee at once` szöveget, annyi karakterként törjük meg, ahány karakteres a kulcs, használjuk kulcsnak `ZEBRAS` szót: 
+```
+6 3 2 4 1 5
+W E A R E D
+I S C O V E
+R E D F L E
+E A T O N C
+E Q K J E U
+```
+Oszloponként olvasunk a fenti sor sorszámnak megfelelően. Ezért gyakoriság elemzéssel nem törhetőek. Ha növelni akarjuk a biztonságot akkor egy szubsztitúciós rejtjelezőre egy transzpozíciós rejtjelezőt használhatunk. 
+
+### Ma használt blokkrejtjelezők
+SP titkosítás, azaz kis méretű bit helyettesítés és nagy méretű bit permutáció.
+
+![sp chyper layers](https://www.researchgate.net/profile/Alex-Biryukov/publication/2997961/figure/fig3/AS:394713627676686@1471118470886/Feistel-cipher-versus-SP-network.png)
+
+#### DES 
+- blokk mérete 64 bit, azaz 64 bitet tud elkódolni, 56 bites kulcshosszúságú, 16 "réteg" van benne, 
+![DES szerkezete](https://wiki.x10sec.org/crypto/blockcipher/figure/des.gif)
+Itt a DES szabvány szerint választjuk ki minden egyes rétegnél, hogy hány kulcsot váalsztunk ki a bemenetből. Ez a **kulcsütemező**nk. Az SP struktúra használatakor a biztonság mértéke leginkább az S dobozokon múlik, kevésbé P-től, és a rétegek számától!
+
 
 
 ### Nyilvános kulcsú rejtjelezés (pulic key)
