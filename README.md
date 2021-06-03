@@ -295,6 +295,13 @@ Itt a DES szabvány szerint választjuk ki minden egyes rétegnél, hogy hány k
 ### digitálsi aláírás
 > függ az üzenettől ezért az aláírás ellenörző meg tudja mondnai, hogy egy másik üzenetet ha aláírtunk akkor az alatt más kéne legyen az aláírásunk is! 
 
+## EA 5 - oprendszerekkel támasztott elvárások
+- megbízhatóság
+- elérhetőség
+- méretezhetősége
+- kezelhetősége
+
+
 ## EA6
 - rendszerinformáció console megnyitás: `rsm32`
 - eszközkezelő: a csatlakoztatottt eszközök kezelését és a hozzá tartozó infrmációkat tekinthetjük meg.
